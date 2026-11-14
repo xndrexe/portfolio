@@ -1,2 +1,22 @@
-{"name": "портфолио", "base": "http://127.0.0.1:8817",
- "steps": [{"open": "/", "name": "главная"}, {"shot_el": ".proj", "name": "первый кейс"}, {"shot_el": ".more", "name": "ещё из системы"}]}
+{
+ "name": "портфолио",
+ "base": "http://127.0.0.1:8817",
+ "steps": [
+  {
+   "open": "/",
+   "name": "главная"
+  },
+  {
+   "shot_el": ".proj",
+   "name": "первый кейс"
+  },
+  {
+   "shot_el": "section:nth-of-type(2) .more",
+   "name": "как начинаю"
+  },
+  {
+   "shot_el": "section:nth-of-type(3) .more",
+   "name": "ещё из системы"
+  }
+ ]
+}
