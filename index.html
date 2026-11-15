@@ -1,105 +1,225 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8">
+<html lang="ru" data-theme="dark"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Александр Костюхов — внутренние сервисы и автоматизация для бизнеса</title>
-<meta name="description" content="Собираю ИИ-агентов, которые снимают с команды ручную работу.">
+<title>Александр Костюхов — внедрение ИИ-агентов и автоматизация</title>
+<meta name="description" content="Собрал систему ИИ-агентов, которая ведёт проекты сама. Внедрение ИИ, интеграции, автоматизация.">
 <meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<script>
+(function(){var d=document.documentElement,t=null,l=null;
+try{t=localStorage.getItem("theme");l=localStorage.getItem("lang")}catch(e){}
+var q=new URLSearchParams(location.search).get("lang");if(q==="en"||q==="ru")l=q;
+d.dataset.theme=t==="light"?"light":"dark";if(l==="en")d.lang="en";})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#111;--soft:#444;--line:#e5e5e5;--bg:#fff;--tint:#f5f5f5}
+:root{--bg:#0f1012;--surf:#17181b;--ink:#ededef;--soft:#a0a1a8;--line:#2a2b30;--acc:#8b95ff;--on-acc:#0f1012;--glow:rgba(139,149,255,.14)}
+[data-theme=light]{--bg:#fbfbfc;--surf:#f0f1f3;--ink:#16171a;--soft:#55575e;--line:#dfe0e4;--acc:#4450d6;--on-acc:#fff;--glow:rgba(68,80,214,.10)}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;font:400 18px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg)}
-.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
-nav{display:flex;justify-content:space-between;align-items:center;height:72px;font-weight:600;font-size:18px}
-nav a{color:var(--ink);text-decoration:none;display:inline-block;padding:10px 0}
-.hero{padding:72px 0 0}
-h1{font-size:60px;line-height:1.08;letter-spacing:-.025em;font-weight:700;margin:0 0 24px;max-width:900px}
-.sub{font-size:20px;color:var(--soft);margin:0 0 36px;max-width:640px}
-.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;font-size:18px;padding:16px 28px;border-radius:999px}
-.btn:hover{background:#333}
-.shot{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
-.hero .shot{margin-top:64px}
-section{padding:96px 0 0}
-h2{font-size:40px;line-height:1.15;letter-spacing:-.02em;margin:0 0 48px}
-.proj{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;padding:0 0 72px}
-.proj h3{font-size:28px;line-height:1.2;letter-spacing:-.01em;margin:0 0 12px}
-.proj p{margin:0;color:var(--soft);max-width:440px}
-.more{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 0 72px}
-.more div{background:var(--tint);border-radius:12px;padding:28px}
-.more h3{font-size:22px;line-height:1.25;margin:0 0 10px}
-.more p{margin:0;color:var(--soft);font-size:17px}
-.end{margin:24px 0 0;padding:64px 0 72px;border-top:1px solid var(--line)}
-.end h2{margin:0 0 16px}
-.end p{color:var(--soft);margin:0 0 32px;max-width:640px}
-footer{padding:0 0 48px;color:var(--soft);font-size:14px}
-footer p{margin:0 0 4px}
-@media(max-width:760px){
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{overflow-x:clip}
+body{margin:0;font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);transition:background .2s,color .2s}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+nav{display:flex;justify-content:space-between;align-items:center;height:72px;gap:16px}
+.me{font-weight:600;text-decoration:none;padding:12px 0}
+.tools{display:flex;align-items:center;gap:8px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button,.icon{font:500 14px/1 Inter,system-ui,sans-serif;color:var(--soft);background:none;border:0;border-radius:999px;cursor:pointer;min-width:44px;height:44px;padding:0 12px}
+.seg button[aria-pressed=true]{background:var(--surf);color:var(--ink)}
+.icon{border:1px solid var(--line);width:44px;height:44px;padding:0;display:grid;place-items:center}
+.icon svg{width:18px;height:18px}
+.hero{position:relative;padding:96px 0 0}
+.hero:before{content:"";position:absolute;inset:-40px 0 auto;height:520px;background:radial-gradient(50% 60% at 50% 0,var(--glow),transparent 70%);pointer-events:none;z-index:-1}
+.role{color:var(--soft);font-size:17px;margin:0 0 20px}
+h1{font-size:64px;line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:0 0 28px;max-width:940px}
+.sub{font-size:20px;line-height:1.55;color:var(--soft);margin:0 0 40px;max-width:680px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;font-weight:500;font-size:17px;text-decoration:none;border:1px solid var(--line)}
+.btn.main{background:var(--acc);color:var(--on-acc);border-color:var(--acc)}
+.btn:hover{filter:brightness(1.08)}
+.frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surf)}
+.frame video,.frame img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#000}
+.demo{margin-top:72px}
+.cap{color:var(--soft);font-size:14px;margin:12px 0 0;max-width:560px}
+section{padding:128px 0 0}
+h2{font-size:44px;line-height:1.1;letter-spacing:-.02em;font-weight:600;margin:0 0 16px}
+.lead{color:var(--soft);font-size:20px;margin:0 0 56px;max-width:680px}
+.case{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:center;padding:0 0 96px}
+.case:nth-of-type(even) .frame{order:2}
+.case h3{font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:0 0 16px}
+.case p{margin:0 0 12px;color:var(--soft)}
+.case .gain{color:var(--ink);margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.trio div{border-top:1px solid var(--line);padding:28px 0 0}
+.trio h3{font-size:20px;line-height:1.3;font-weight:600;margin:0 0 12px}
+.trio p{margin:0;color:var(--soft)}
+.end{margin:128px 0 0;padding:72px 0 80px;border-top:1px solid var(--line)}
+.end h2{max-width:760px}
+.end .lead{margin-bottom:40px}
+footer{padding:0 0 48px;color:var(--soft);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px}
+footer a{display:inline-block;padding:12px 0}
+[data-en]{}
+@media(max-width:820px){
  .wrap{padding:0 20px}
- nav{height:60px}
- .hero{padding:40px 0 0}
+ nav{height:64px}
+ .hero{padding:48px 0 0}
  h1{font-size:40px;margin-bottom:20px}
- .sub{font-size:18px;margin-bottom:28px}
- .btn{display:block;text-align:center}
- .hero .shot{margin-top:40px}
- section{padding:64px 0 0}
- h2{font-size:28px;margin-bottom:32px}
- .proj{grid-template-columns:1fr;gap:20px;padding-bottom:48px}
- .proj h3{font-size:20px}
- .more{grid-template-columns:1fr;gap:16px;padding-bottom:48px}
- .more div{padding:22px}
- .end{padding:48px 0 56px}
+ .sub{font-size:17px;margin-bottom:28px}
+ .cta .btn{flex:1 1 100%}
+ .demo{margin-top:48px}
+ section{padding:80px 0 0}
+ h2{font-size:28px}
+ .lead{font-size:17px;margin-bottom:36px}
+ .case{grid-template-columns:1fr;gap:20px;padding-bottom:64px}
+ .case:nth-of-type(even) .frame{order:0}
+ .case h3{font-size:20px;margin-bottom:12px}
+ .trio{grid-template-columns:1fr;gap:8px}
+ .end{margin-top:80px;padding:48px 0 56px}
 }
+@media(max-width:420px){.me{font-size:15px;max-width:7.5em;line-height:1.25}.seg button{padding:0 10px}.tools{gap:6px}}
 </style></head><body>
 <div class="wrap">
-<nav><a href="#">Александр Костюхов</a><a href="https://t.me/xanderexe">@xanderexe</a></nav>
+<nav>
+ <a class="me" href="#" data-t="name">Александр Костюхов</a>
+ <div class="tools">
+  <div class="seg" role="group" aria-label="Язык / Language"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  <button type="button" class="icon" id="theme" aria-label="Светлая тема" data-t-aria="toLight">
+   <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+   <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+ </div>
+</nav>
 
 <header class="hero">
- <h1>Делаю внутренние сервисы и автоматизацию для бизнеса под ключ</h1>
- <p class="sub">Новый инструмент для отдела, автоматизация всей компании или одного отдела, поддержка и доработка старых сервисов. Сам разбираюсь в задаче, собираю, запускаю и сопровождаю. Код в основном пишут ИИ-агенты, за результат отвечаю я.</p>
- <a class="btn" href="https://t.me/xanderexe">Написать в Telegram</a>
- <img class="shot" src="img/p11.jpg" width="1280" height="720" alt="Джарвис: задачи системы агентов на телефоне, компьютере, сайте и в Telegram (данные демонстрационные)">
+ <p class="role" data-t="role">Внедрение ИИ-агентов, интеграции и автоматизация. AI-first.</p>
+ <h1 data-t="h1">Собрал систему ИИ-агентов, которая ведёт проекты сама</h1>
+ <p class="sub" data-t="sub">Агенты берут задачи, делают работу, проверяют друг друга и приходят ко мне только за решениями. Так же встраиваю агентов в работу компании: интеграции, внутренние сервисы, отчёты и тревоги без ручного труда.</p>
+ <div class="cta">
+  <a class="btn main" href="https://t.me/xanderexe" data-t="tg">Написать в Telegram</a>
+  <a class="btn" id="cv" href="https://hh.ru/resume/7b2c86dcff0952861e0039ed1f30537872654a" data-t="cv">Резюме на hh.ru</a>
+ </div>
+ <div class="demo">
+  <div class="frame"><video id="jarvis" controls preload="none" playsinline poster="media/jarvis.jpg" src="media/jarvis.mp4"></video></div>
+  <p class="cap" data-t="jcap">Джарвис — пульт системы: голос, задачи, агенты и решения в одном приложении на телефоне, компьютере, сайте и в Telegram. 2 минуты, данные демонстрационные.</p>
+ </div>
 </header>
 
 <section>
- <h2>Что я построил</h2>
- <div class="proj">
-  <img class="shot" src="img/p9.jpg" width="1280" height="720" alt="Секретарь созвонов: план дня, переносы и протокол встречи (данные демонстрационные)" loading="lazy">
-  <div><h3>ИИ-координатор в команде</h3><p>В компании с брендами на Amazon агент-координатор сам читал задачи и переписку команды, раздавал работу своим агентам и приносил готовое на проверку. Люди ставили задачу как обычно, без новых программ и ручной раздачи. Работает на моей системе агентов: готовое проверяет отдельный агент, опасное останавливает сторож. На кадре другой агент системы, секретарь созвонов. Такую же схему могу встроить в вашу команду.</p></div>
+ <h2 data-t="casesH">Что построил</h2>
+ <p class="lead" data-t="casesL">Работа для компании с собственными брендами в интернет-торговле. Кадры — запись настоящих рабочих экранов, имена и цифры заменены.</p>
+
+ <div class="case">
+  <div class="frame"><img src="img/p9.jpg" width="1280" height="720" loading="lazy" alt="" data-t-alt="a1"></div>
+  <div><h3 data-t="c1h">ИИ-координатор в команде</h3>
+  <p data-t="c1p">Агент сам читал задачи и переписку команды, раздавал работу своим агентам и приносил готовое на проверку. Готовое принимал отдельный агент, опасные действия останавливал сторож.</p>
+  <p class="gain" data-t="c1g">Люди ставили задачи как обычно — без новых программ и ручной раздачи.</p></div>
  </div>
- <div class="proj">
-  <img class="shot" src="img/p1.jpg" width="1600" height="900" alt="Сервис платежей: что оплатить на этой неделе (данные демонстрационные)" loading="lazy">
-  <div><h3>Платежи вместо Excel</h3><p>Компания с брендами на Amazon вела платежи в большом Excel. Свёл заказы, платежи поставщикам, рассрочки и расходы в один сервис: владелец видел расходы на год вперёд, сверка с бухгалтерией сама находила расхождения в себестоимости, а рекламный отдел получал новые недели в свою таблицу без ручного переноса.</p></div>
+
+ <div class="case">
+  <div class="frame"><video class="loop" muted loop playsinline preload="none" poster="media/payments.jpg" src="media/payments.mp4" aria-label="" data-t-aria="a2"></video></div>
+  <div><h3 data-t="c2h">Платежи вместо Excel</h3>
+  <p data-t="c2p">Финотдел вёл заказы поставщикам, рассрочки и расходы в большом Excel. Перевёл его на сервис с планом платежей на год вперёд и сверкой с бухгалтерией.</p>
+  <p class="gain" data-t="c2g">Владелец видит расходы на год вперёд, расхождения в себестоимости находятся сами.</p></div>
  </div>
- <div class="proj">
-  <img class="shot" src="img/p4.jpg" width="1280" height="720" alt="Сторож товаров на Amazon (данные демонстрационные)" loading="lazy">
-  <div><h3>Сторож товаров на Amazon</h3><p>Если у товара падал рейтинг, пропадала кнопка покупки или карточку блокировали, команда узнавала в тот же день из своего рабочего чата и успевала исправить до просадки продаж. Туда же приходили жалобы покупателей на брак из отзывов.</p></div>
+
+ <div class="case">
+  <div class="frame"><video class="loop" muted loop playsinline preload="none" poster="media/watch.jpg" src="media/watch.mp4" aria-label="" data-t-aria="a3"></video></div>
+  <div><h3 data-t="c3h">Сторож товаров и конкурентов</h3>
+  <p data-t="c3p">Следит за своими товарами и конкурентами на маркетплейсе: рейтинг, цена, кнопка покупки, блокировки. Изменения — сразу в рабочий чат.</p>
+  <p class="gain" data-t="c3g">Команда узнаёт о проблеме в тот же день и чинит до просадки продаж.</p></div>
+ </div>
+
+ <div class="case">
+  <div class="frame"><video class="loop" muted loop playsinline preload="none" poster="media/analytics.jpg" src="media/analytics.mp4" aria-label="" data-t-aria="a4"></video></div>
+  <div><h3 data-t="c4h">Панель блогеров</h3>
+  <p data-t="c4p">Все блогеры компании и их ролики с YouTube, TikTok и Instagram на одном экране. ИИ сводит, что зрители хвалят и ругают в комментариях.</p>
+  <p class="gain" data-t="c4g">Видно, какие идеи роликов приносят просмотры, без ручных таблиц.</p></div>
  </div>
 </section>
 
 <section>
- <h2>Как начинаю в компании</h2>
- <div class="more">
-  <div><h3>Первая неделя: где ручная работа</h3><p>Смотрю задачи, таблицы и переписку отдела и нахожу место, где люди дольше всего делают одно и то же руками или теряют деньги на ошибках.</p></div>
-  <div><h3>Вторая неделя: первый результат</h3><p>Собираю решение для одного такого места и запускаю на ваших живых данных. Отдел работает как обычно, без новых программ и долгого обучения.</p></div>
-  <div><h3>Дальше: по шагу</h3><p>Показываю, что изменилось, и предлагаю следующее место для автоматизации. Каждый шаг виден и проверяется до того, как браться за новый.</p></div>
- </div>
-</section>
-
-<section>
- <h2>Ещё из системы</h2>
- <div class="more">
-  <div><h3>Своя система агентов</h3><p>На своём сервере держу команду ИИ-агентов: у каждого проекта свой агент, задачи ставлю голосом через ассистента Джарвиса. Такую же систему могу настроить у вас, чтобы данные не уходили наружу.</p></div>
-  <div><h3>Защита агентов</h3><p>Сторож проверяет каждую команду агента до запуска и останавливает опасное. Ключи и пароли скрыты от модели, текст из писем и страниц агент считает данными, а не поручением. Деньги, отправка от имени человека и удаление — только после его подтверждения.</p></div>
-  <div><h3>Секретарь созвонов</h3><p>После созвона сам раскладывает договорённости по задачам: кто, что и к какому сроку. Ничего не теряется к вечеру, и не нужно пересматривать запись.</p></div>
+ <h2 data-t="sysH">Как устроена система</h2>
+ <p class="lead" data-t="sysL">Её я довожу сам: чтобы агенты работали без присмотра и не ломали лишнего.</p>
+ <div class="trio">
+  <div><h3 data-t="s1h">Оркестратор</h3><p data-t="s1p">Раздаёт задачи агентам проектов, следит за очередью и лимитами. Агенты передают работу друг другу и советуются, когда решение дорогое.</p></div>
+  <div><h3 data-t="s2h">Приёмка и сторож</h3><p data-t="s2p">Готовое принимает отдельный агент, а не тот, кто делал. Сторож проверяет каждую команду до запуска, ключи и пароли скрыты от модели.</p></div>
+  <div><h3 data-t="s3h">Решения — за человеком</h3><p data-t="s3p">Деньги, отправка от имени человека и удаление — только после его «да» кнопкой в Джарвисе. После созвона договорённости сами становятся задачами.</p></div>
  </div>
 </section>
 
 <div class="end">
- <h2>Ищу команду, где это нужно</h2>
- <p>Удалённо: полная занятость, частичная или проект. Удобнее по ТК, ГПХ тоже подходит.</p>
- <a class="btn" href="https://t.me/xanderexe">Написать в Telegram</a>
+ <h2 data-t="endH">Ищу работу: внедрение ИИ, автоматизация, интеграции</h2>
+ <p class="lead" data-t="endL">Удалённо: полная занятость, частичная или проект.</p>
+ <div class="cta"><a class="btn main" href="https://t.me/xanderexe" data-t="tg">Написать в Telegram</a><a class="btn" href="mailto:skostuhov@gmail.com">skostuhov@gmail.com</a></div>
 </div>
-<footer><p><a href="mailto:skostuhov@gmail.com" style="color:inherit;display:inline-block;padding:14px 0">skostuhov@gmail.com</a></p><p>Интерфейсы и данные на кадрах демонстрационные.</p></footer>
-</div></body></html>
+<footer><span data-t="foot">Интерфейсы и данные на кадрах демонстрационные.</span></footer>
+</div>
+<script>
+var T={en:{
+name:"Aleksandr Kostyukhov",
+role:"AI agent adoption, integrations and automation. AI-first.",
+h1:"I built an AI agent system that runs projects on its own",
+sub:"Agents pick up tasks, do the work, check each other and come to me only for decisions. I bring agents into a company's work the same way: integrations, internal tools, reports and alerts with no manual work.",
+tg:"Message me on Telegram",cv:"CV (PDF)",
+jcap:"Jarvis is the control panel of the system: voice, tasks, agents and decisions in one app on phone, desktop, web and Telegram. 2 minutes, demo data, interface in Russian.",
+casesH:"What I built",
+casesL:"Work for an online retail company with its own brands. The clips are recordings of real working screens with names and numbers replaced.",
+c1h:"AI coordinator for a team",
+c1p:"The agent read the team's tasks and chat on its own, split the work between its agents and brought finished work back for review. A separate agent accepted the result, a guard stopped risky actions.",
+c1g:"People kept setting tasks the usual way, with no new tools and no manual hand-off.",
+c2h:"Payments instead of Excel",
+c2p:"The finance team kept supplier orders, instalments and expenses in a large Excel workbook. I moved it to a service with a year-ahead payment plan and a check against accounting.",
+c2g:"The owner sees expenses a year ahead; unit-cost mismatches surface on their own.",
+c3h:"Product and competitor watch",
+c3p:"Watches the company's own products and competitors on a marketplace: rating, price, buy button, blocks. Changes go straight to the work chat.",
+c3g:"The team learns about a problem the same day and fixes it before sales drop.",
+c4h:"Creator dashboard",
+c4p:"All of the company's creators and their videos from YouTube, TikTok and Instagram on one screen. AI sums up what viewers praise and complain about in the comments.",
+c4g:"It shows which video ideas bring views, with no manual spreadsheets.",
+sysH:"How the system works",
+sysL:"I keep improving it so agents work unattended and don't break things.",
+s1h:"Orchestrator",s1p:"Hands tasks to project agents and watches the queue and limits. Agents pass work to each other and consult each other when a decision is costly.",
+s2h:"Acceptance and guard",s2p:"Finished work is accepted by a separate agent, not by the one who did it. A guard checks every command before it runs; keys and passwords are hidden from the model.",
+s3h:"People make the calls",s3p:"Money, sending on someone's behalf and deleting happen only after that person taps “yes” in Jarvis. After a call, what was agreed becomes tasks on its own.",
+endH:"Looking for work: AI adoption, automation, integrations",
+endL:"Remote: full-time, part-time, contract. Russian is my native language, written English is fine (B1).",
+foot:"Interfaces and data in the clips are demo data.",
+toLight:"Light theme",toDark:"Dark theme",
+a1:"Meeting secretary agent: day plan, reschedules and meeting notes (demo data)",
+a2:"Payments service: orders, instalments and weekly payment plan (demo data)",
+a3:"Product watch: own products, competitors and change log (demo data)",
+a4:"Creator dashboard: creators, top videos and comment summary (demo data)",
+title:"Aleksandr Kostyukhov — AI agents and automation",
+cvHref:"cv-en.pdf"},ru:{toLight:"Светлая тема",toDark:"Тёмная тема",
+a1:"Агент-секретарь созвонов: план дня, переносы и протокол встречи (данные демонстрационные)",
+a2:"Сервис платежей: заказы, рассрочки и план оплат на неделю (данные демонстрационные)",
+a3:"Сторож товаров: свои товары, конкуренты и журнал изменений (данные демонстрационные)",
+a4:"Панель блогеров: блогеры, топ роликов и сводка комментариев (данные демонстрационные)",
+cvHref:"https://hh.ru/resume/7b2c86dcff0952861e0039ed1f30537872654a"}};
+var d=document.documentElement;
+document.querySelectorAll("[data-t]").forEach(function(e){T.ru[e.dataset.t]=T.ru[e.dataset.t]||e.textContent});
+T.ru.title=document.title;
+function L(){return d.lang==="en"?"en":"ru"}
+function apply(){var l=L(),t=T[l];
+ document.querySelectorAll("[data-t]").forEach(function(e){if(t[e.dataset.t])e.textContent=t[e.dataset.t]});
+ document.querySelectorAll("[data-t-alt]").forEach(function(e){e.alt=t[e.dataset.tAlt]});
+ document.querySelectorAll("[data-t-aria]").forEach(function(e){if(e.id!=="theme")e.setAttribute("aria-label",t[e.dataset.tAria])});
+ document.title=t.title;document.getElementById("cv").href=t.cvHref;
+ document.querySelectorAll("[data-lang]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===l)});
+ var dark=d.dataset.theme!=="light",th=document.getElementById("theme");
+ th.setAttribute("aria-label",dark?t.toLight:t.toDark);
+ th.querySelector(".sun").style.display=dark?"":"none";th.querySelector(".moon").style.display=dark?"none":"";}
+function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+document.querySelectorAll("[data-lang]").forEach(function(b){b.onclick=function(){d.lang=b.dataset.lang;save("lang",d.lang);
+ var u=new URL(location.href);u.searchParams.delete("lang");history.replaceState(null,"",u);apply()}});
+document.getElementById("theme").onclick=function(){d.dataset.theme=d.dataset.theme==="light"?"dark":"light";save("theme",d.dataset.theme);apply()};
+apply();
+var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll("video.loop").forEach(function(v){
+ if(still||!("IntersectionObserver"in window)){v.controls=true;return}
+ new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){v.play().catch(function(){v.controls=true})}else v.pause()})},{threshold:.4}).observe(v);
+ v.onclick=function(){v.paused?v.play():v.pause()};});
+</script>
+</body></html>
