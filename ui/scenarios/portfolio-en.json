@@ -1,0 +1,22 @@
+{
+ "name": "портфолио en",
+ "base": "http://127.0.0.1:8817",
+ "steps": [
+  {
+   "open": "/en/",
+   "name": "главная en"
+  },
+  {
+   "shot_el": ".proj",
+   "name": "первый кейс"
+  },
+  {
+   "shot_el": "section:nth-of-type(2) .more",
+   "name": "как начинаю"
+  },
+  {
+   "shot_el": "section:nth-of-type(3) .more",
+   "name": "ещё из системы"
+  }
+ ]
+}
