@@ -90,6 +90,12 @@ footer a{display:inline-block;padding:12px 0}
  .play svg{width:22px;height:22px}
  .end{margin-top:80px;padding:48px 0 56px}
 }
+@media(max-width:430px){
+ /* Обложка ролика: плашки начинаются в 14% от края — круг 52 px их задевает. Зона нажатия остаётся 48. */
+ .play{width:48px;height:48px;left:4px;top:4px;background:none;box-shadow:none}
+ .play:before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--glow)}
+ .play svg{position:relative;width:18px;height:18px;margin-left:3px}
+}
 @media(max-width:420px){.me{font-size:15px;max-width:7.5em;line-height:1.25}.seg button{padding:0 10px}.tools{gap:6px}}
 </style></head><body>
 <div class="bar"><nav class="wrap">
