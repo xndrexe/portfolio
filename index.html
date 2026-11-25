@@ -63,6 +63,24 @@ h2{font-size:44px;line-height:1.1;letter-spacing:-.02em;font-weight:600;margin:0
 .trio div{border:1px solid var(--line);border-radius:16px;background:var(--surf);box-shadow:inset 0 1px 0 var(--hi);padding:28px}
 .trio h3{font-size:20px;line-height:1.3;font-weight:600;margin:0 0 12px}
 .trio p{margin:0;color:var(--soft)}
+.ct{border:1px solid var(--line);border-radius:16px;background:var(--surf);box-shadow:inset 0 1px 0 var(--hi);padding:40px}
+.ct .tag{display:inline-block;font-size:14px;color:var(--acc);border:1px solid var(--ring);border-radius:999px;padding:4px 12px;margin:0 0 20px}
+.ct h3{font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:0 0 12px}
+.ct .where{color:var(--soft);margin:0}
+.ct .txt{margin:0}
+.ct dl{margin:0;display:grid;gap:20px}
+.ct dt{font-weight:600;margin:0 0 4px}
+.ct dd{margin:0;color:var(--soft)}
+.ct dd.gain{color:var(--ink)}
+.flow{margin:40px 0 0;padding:32px 0 0;border-top:1px solid var(--line)}
+.flow h4{font-size:14px;font-weight:500;color:var(--soft);text-transform:uppercase;letter-spacing:.06em;margin:0 0 16px}
+.flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:28px}
+.flow li{position:relative;display:flex;font-size:15px;line-height:1.35}
+.flow li span{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 14px}
+.flow li+li:before{content:"→";color:var(--acc);position:absolute;left:-21px;top:50%;transform:translateY(-50%)}
+.flow .side{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 0;font-size:15px;color:var(--soft)}
+.flow .side span{border:1px dashed var(--ring);border-radius:999px;padding:6px 12px;color:var(--ink)}
+html:lang(en) #case-tracker{display:none}
 .end{margin:128px 0 0;padding:96px 0 96px;border-top:1px solid var(--line)}
 .end h2{max-width:760px}
 .end .lead{margin-bottom:40px}
@@ -88,6 +106,13 @@ footer a{display:inline-block;padding:12px 0}
  .trio div{padding:24px}
  .play{width:52px;height:52px;left:12px;top:12px;bottom:auto;box-shadow:0 0 0 6px var(--glow)}
  .play svg{width:22px;height:22px}
+ .ct{padding:24px}
+ .ct h3{font-size:22px}
+ .ct .txt{display:grid;grid-template-columns:1fr;gap:24px}
+ .flow{margin-top:28px;padding-top:24px}
+ .flow ol{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+ .flow li{flex-direction:column;align-items:flex-start}
+ .flow li+li:before{content:"↓";position:static;transform:none;padding:4px 0 4px 16px}
  .end{margin-top:80px;padding:48px 0 56px}
 }
 @media(max-width:430px){
@@ -132,6 +157,26 @@ footer a{display:inline-block;padding:12px 0}
   <div><h3 data-t="s2h">Приёмка и сторож</h3><p data-t="s2p">Готовое принимает отдельный агент, а не тот, кто делал. Сторож проверяет каждую команду до запуска, ключи и пароли скрыты от модели.</p></div>
   <div><h3 data-t="s3h">Решения — за человеком</h3><p data-t="s3p">Деньги, отправка от имени человека и удаление — только после его «да» кнопкой в Джарвисе. После созвона договорённости сами становятся задачами.</p></div>
  </div>
+</section>
+
+<section id="case-tracker">
+ <h2>Кейс из работы в компании</h2>
+ <p class="lead">Связка партнёрки и трекера, которую я построил и вёл.</p>
+ <article class="ct">
+  <div class="txt">
+   <div><span class="tag">Кейс</span><h3>Трекер и партнёрка без ручной работы</h3><p class="where"><b>Где:</b> партнёрский отдел арбитражной компании (iGaming и финансовые офферы), я — технический специалист отдела.</p></div>
+   <dl>
+    <div><dt>Как было:</dt><dd>оффер рекламодателя заводили руками дважды — в партнёрке Affise и в трекере. Постбэки терялись, конверсии приходилось сверять глазами, о закончившемся капе байер узнавал, когда трафик уже ушёл впустую.</dd></div>
+    <div><dt>Что сделал:</dt><dd>связал трекер с партнёркой на автоматике. Офферы из Affise сами появляются в трекере, потерянные постбэки досылаются, дубли и метки офферов разбираются без рук. Работал так в Keitaro, AIO и в самописном трекере компании; при переезде отдела с Keitaro на AIO перенёс связку целиком. Вокруг неё — бот тестовых лидов, уведомления байерам о капах, сверка расхождений в выплатах, Google Таблицы со скриптами для BDM-менеджеров, части байеров и руководителя.</dd></div>
+    <div><dt>Что это дало:</dt><dd class="gain">новый оффер запускается без двойного ввода, конверсии не пропадают, байер узнаёт о капе вовремя, расхождения в выплатах видны до расчёта с рекламодателем.</dd></div>
+   </dl>
+  </div>
+  <div class="flow" role="figure" aria-label="Схема: заявка рекламодателя → оффер в Affise → оффер в трекере → трафик байера → постбэк в трекер → конверсия в Affise; сбоку — бот тестового лида, уведомления о капах, сверка выплат.">
+   <h4>Схема</h4>
+   <ol><li><span>заявка рекламодателя</span></li><li><span>оффер в Affise</span></li><li><span>оффер в трекере</span></li><li><span>трафик байера</span></li><li><span>постбэк в трекер</span></li><li><span>конверсия в Affise</span></li></ol>
+   <p class="side">сбоку — <span>бот тестового лида</span><span>уведомления о капах</span><span>сверка выплат</span></p>
+  </div>
+ </article>
 </section>
 
 <div class="end">
